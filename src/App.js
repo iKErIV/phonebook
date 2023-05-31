@@ -3,22 +3,24 @@ import { useState } from "react";
 const Person = ({ person }) => {
   return (
     <div>
-      {person.name}
+      {person.name} {person.number}
     </div>
   )
 }
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: "Arto Hellas" }
+    { name: "Arto Hellas", number: "040-1234567" }
   ]);
-  const [newName, setNewName] = useState("a new person...");
-
+  const [newName, setNewName] = useState("");
+  const [newNumber, setNewNumber] = useState("");
+  
   const addPerson = (event) => {
     event.preventDefault();
 
     const personObject = {
-      name: newName
+      name: newName,
+      number: newNumber
     }
 
     for (const element of persons) {
@@ -29,10 +31,15 @@ const App = () => {
 
     setPersons(persons.concat(personObject));
     setNewName("");
+    setNewNumber("");
   }
 
   const handlePersonChange = (event) => {
     setNewName(event.target.value);
+  }
+
+  const handleNumberChange = (event) => {
+    setNewNumber(event.target.value);
   }
 
   return (
@@ -45,6 +52,14 @@ const App = () => {
           <input 
             value={newName} 
             onChange={handlePersonChange} 
+          />
+        </div>
+
+        <div>
+          number:
+          <input
+            value={newNumber}
+            onChange={handleNumberChange}
           />
         </div>
 
